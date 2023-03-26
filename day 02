@@ -1,0 +1,28 @@
+#PART 1
+with open('input','r') as data:
+    guide = [line.rstrip().split() for line in data.readlines()]
+    score = 0
+    for round in guide:
+        a = ord(round[0])
+        b = ord(round[1])
+        if b - a == 23:
+            score += 3
+        elif b- a in [21,24]:
+            score += 6
+        score += b - ord ('X') + 1
+    print(score)
+
+#PART 2
+point = 0
+for round in guide:
+    a = ord(round[0])
+    b = ord(round[1])
+    if round[1] == 'Y':
+        point += 3
+    elif round[1] == 'Z':
+        point += 6
+    if (a+b)%3 == 0:
+        point += 3
+    else:
+        point += (a+b)%3
+print(point)
