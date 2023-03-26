@@ -1,0 +1,30 @@
+with open ('input','r') as data:
+    lines = [line.rstrip() for line in data.readlines()]
+    #PART 1:
+    res = 0
+    for i in lines:
+        mid = len(i)//2
+        left = i[:mid]
+        right = i[mid:]
+        for j in left:
+            if j in right:
+                break
+        if j.islower():
+            res += ord(j) - ord('a') + 1
+        else:
+            res += ord(j) - ord('A') + 27
+    print(res)
+    #PART 2:
+    item_list = []
+    p2 = 0
+    for idx in range(3, len(lines), 3):
+        item_list.append(lines[idx-3:idx])
+    for item in item_list:
+        for it in item[0]:
+            if it in item[1] and it in item[2]:
+                break
+        if it.islower():
+            p2 += ord(it) - ord('a') + 1
+        else:
+            p2 += ord(it) - ord('A') + 27
+    print(p2)
