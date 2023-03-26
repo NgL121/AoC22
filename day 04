@@ -1,0 +1,12 @@
+with open('input','r') as data:
+    lines = [line.rstrip().split(',') for line in data.readlines()]
+    pairs = [[i.split('-') for i in line] for line in lines]
+    count = 0
+    overlap = 0
+    for rang in pairs:
+        if (int(rang[0][0]) in range(int(rang[1][0]), int(rang[1][1]) + 1) and int(rang[0][1]) in range(int(rang[1][0]), int(rang[1][1]) + 1)) or (int(rang[1][0]) in range(int(rang[0][0]), int(rang[0][1]) + 1) and int(rang[1][1]) in range(int(rang[0][0]), int(rang[0][1]) + 1)):
+            count += 1
+        if (int(rang[0][0]) in range(int(rang[1][0]), int(rang[1][1])+1)) or (int(rang[1][0]) in range(int(rang[0][0]), int(rang[0][1]) + 1)):
+            overlap += 1
+    print(count)
+    print(overlap)
