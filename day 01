@@ -1,0 +1,13 @@
+with open ('input','r') as data:
+    val = data.readlines()
+    cal_list = []
+    cal = 0
+    for i in val:
+        if i != '\n':
+            cal += int(i)
+        else:
+            cal_list.append(cal)
+            cal = 0
+    cal_list.sort()
+    print(cal_list[-1])
+    print(sum(cal_list[-3:]))
