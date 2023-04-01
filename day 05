@@ -1,0 +1,32 @@
+from copy import deepcopy
+
+with open('input','r') as data:
+    cargo, instruct = data.read().split('\n\n')
+    cargo = cargo.split('\n')[:-1]
+    stack = [[]]
+    for i in range(len(cargo[-1])):
+        if cargo[-1][i].isalpha():
+            for j in range(len(cargo)):
+                try:
+                    if cargo[j][i] != ' ':
+                        stack[-1].append(cargo[j][i])
+                except Exception:
+                    continue
+            stack[-1].reverse()
+            stack.extend([[]])
+    stack.pop()
+    instruct = instruct.splitlines()
+    instruct = [instruct[a].split(' ') for a in range(len(instruct))]
+    p1 = deepcopy(stack)
+    p2 = deepcopy(stack)
+    for a in instruct:
+        for b in a:
+            if not b.isdigit():
+                a.remove(b)
+        for c in range(int(a[0])):
+            p1[int(a[2]) - 1].append(p1[int(a[1]) - 1].pop())
+            p2[int(a[2]) - 1].append(p2[int(a[1]) - 1].pop(-int(a[0])+c))
+    answer_p1 = ''.join([a[-1] for a in p1])
+    answer_p2 = ''.join([a[-1] for a in p2 if a])
+    print(answer_p1)
+    print(answer_p2)
